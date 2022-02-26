@@ -1,0 +1,7 @@
+Brarti ono 3 tingkat:
+Admin, Unit, User
+Unit: input tanggal, jenis, keterangan
+Admin: acc, pilih pelaksana
+Unit: Approved
+
+download data permintaan/ hari
