@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style/style.css">
     <title>Website</title>
 </head>
-<h2 style="background-color: orange;">Logged in as <?= $_SESSION['userid']?> | <a href="logout.php">Logout</a></h2>
+<h2 style="background-color: orange; padding: 1rem; margin: 0;">Logged in as <?= $_SESSION['userid']?> | <a href="logout.php">Logout</a></h2>
 <!-- <a href="admin.php">Admin</a>
 <a href="unit.php">Unit</a>
 <a href="executor.php">Excecutor</a> -->
