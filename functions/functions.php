@@ -2,6 +2,12 @@
     // connect
     $conn = mysqli_connect("localhost", "root", "", "administration");
 
+    function addUser($query){
+        global $conn;
+        mysqli_query($conn, $query);
+        return mysqli_affected_rows($conn);
+    }
+
     function query($query){
         global $conn;
         $result = mysqli_query($conn, $query);
@@ -12,20 +18,21 @@
         return $rows;
     }
 
-    function tambah($query){
+    function addTask($query){
         global $conn;
-        $TaskId = htmlspecialchars($query["TaskId"]);
         $UnitOwner = htmlspecialchars($query["UnitOwner"]);
         $TaskName = htmlspecialchars($query["TaskName"]);
         $TaskDate = htmlspecialchars($query["TaskDate"]);
         $TaskType = htmlspecialchars($query["TaskType"]);
         $TaskDescription = htmlspecialchars($query["TaskDescription"]);
         $TaskExcecutor = htmlspecialchars($query["TaskExcecutor"]);
-        $TaskApprove = htmlspecialchars($query["TaskApprove"]);
-        $TaskDone = htmlspecialchars($query["TaskDone"]);
+        // $TaskApprove = htmlspecialchars($query["TaskApprove"]);
+        $TaskApprove = 2;
+        // $TaskDone = htmlspecialchars($query["TaskDone"]);
+        $TaskDone = 0;
 
         $query = "INSERT INTO tasks VALUES (
-            '$TaskId',
+            '',
             '$UnitOwner',
             '$TaskName',
             '$TaskDate',
