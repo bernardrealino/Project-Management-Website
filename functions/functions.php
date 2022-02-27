@@ -53,4 +53,8 @@
         global $conn;
         mysqli_query($conn, $query);
     }
+
+    if (isset($_GET['logout'])){
+        header("Location: logout.php");
+    }
 ?>

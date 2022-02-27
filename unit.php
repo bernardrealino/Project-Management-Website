@@ -1,6 +1,15 @@
 <?php require("functions/functions.php")?>
 <?php 
-    $tasks = query("SELECT * FROM tasks ORDER BY TaskId");
+    session_start();
+
+    if(!$_SESSION['login']){
+        header("Location: login.php");
+        exit;
+    }
+?>
+<?php 
+    $owner = $_SESSION['userid'];
+    $tasks = query("SELECT * FROM tasks WHERE UnitOwner = '$owner'");
     $users = query("SELECT * FROM users ORDER BY UserName");
     if(isset($_POST["submit"])){
         
@@ -48,12 +57,14 @@
                 <?php elseif($task["TaskApprove"] == 0):?>
                     <td>Declined</td>
                 <?php elseif($task["TaskApprove"] == 2):?>
-                    <td><button>Accept</button> <button>Decline</button></td>        
+                    <td>Pending Approval</td>
                 <?php endif?>
-                <?php if($task["TaskDone"] == 1):?>
+                <?php if($task["TaskDone"] == 0):?>
+                    <td>Not Started</td>        
+                <?php elseif($task["TaskDone"] == 1):?>
+                    <td>Working</td>
+                <?php elseif($task["TaskDone"] == 2):?>
                     <td>Done</td>
-                <?php elseif($task["TaskDone"] == 0):?>
-                    <td>Working</td>        
                 <?php endif?>
             </tr>
         <?php endforeach?>  

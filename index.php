@@ -1,20 +1,21 @@
+<?php 
+    session_start();
+
+    if(!$_SESSION['login']){
+        header("Location: login.php");
+        exit;
+    }else{
+        echo $_SESSION['usertype'];
+        if($_SESSION['usertype'] == 'ADM'){
+            header("Location: admin.php");
+        }elseif($_SESSION['usertype'] == 'UNT'){
+            header("Location: unit.php");
+        }elseif($_SESSION['usertype'] == 'USR'){
+            header("Location: executor.php");
+        }
+    }
+?>
 <?php require("functions/functions.php")?>
 <?php require("header.php")?>
 
-<h2>Login</h2>
-<form action="index.php">
-    <table border='1' cellpadding='10' cellspacing='0'>
-        <tr>
-            <td><label for="username">username:</label></td>
-            <td><input type="text" name="username" id="username"></td>
-        </tr>
-        <tr>
-            <td><label for="password">password:</label></td>
-            <td><input type="text" name="password" id="password"></td>
-        </tr>
-    </table>
-    <tr>
-        <button type="submit">Login</button>
-    </tr>
-</form>
 <?php require("footer.php")?>

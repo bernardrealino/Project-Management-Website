@@ -1,5 +1,12 @@
-
 <?php require("functions/functions.php")?>
+<?php 
+    session_start();
+
+    if(!$_SESSION['login']){
+        header("Location: login.php");
+        exit;
+    }
+?>
 <?php 
     $tasks = query("SELECT * FROM tasks ORDER BY TaskId");
     $users = query("SELECT * FROM users ORDER BY UserName");

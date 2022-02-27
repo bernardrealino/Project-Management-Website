@@ -1,7 +1,15 @@
 <?php require("functions/functions.php")?>
 <?php 
-    $tasks = query("SELECT * FROM tasks WHERE TaskExcecutor='Jono' && TaskApprove=1 ORDER BY TaskId");
+    session_start();
 
+    if(!$_SESSION['login']){
+        header("Location: login.php");
+        exit;
+    }
+?>
+<?php 
+    $userid = $_SESSION['userid'];
+    $tasks = query("SELECT * FROM tasks WHERE TaskExcecutor = '$userid'");
 ?>
 <?php require("header.php")?>
 <h1>Excecutor</h1>
@@ -15,7 +23,6 @@
             <th>Type</th>
             <th>Description</th>
             <th>Excecutor</th>
-            <th>Approval</th>
             <th>Status</th>
         </tr>
         <?php foreach($tasks as $task):?>
@@ -27,15 +34,6 @@
                 <td><?= $task["TaskType"]?></td>
                 <td><?= $task["TaskDescription"]?></td>
                 <td><?= $task["TaskExcecutor"]?></td>
-                <?php if($task["TaskApprove"] == 1):?>
-                    <td>Accepted</td>
-                <?php elseif($task["TaskApprove"] == 0):?>
-                    <td>Declined</td>
-                <?php elseif($task["TaskApprove"] == 2):?>
-                    <form action="excecutor.php" method="GET">
-                        <td><button type="submit" name="submit" value="1">Accept</button> <button type="submit" name="submit" value="0">Decline</button></td>        
-                    </form>
-                <?php endif?>
                 <?php if($task["TaskDone"] == 1):?>
                     <td>Done</td>
                 <?php elseif($task["TaskDone"] == 0):?>
